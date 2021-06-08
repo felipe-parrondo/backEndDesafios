@@ -34,3 +34,11 @@ function Libro (nombre, autor) {
     this.nombre = nombre
     this.autor = autor
 }
+
+let libro1 = new Libro ("LOTR", "Tolkien")
+let libro2 = new Libro ("1984", "O")
+let lArray = [libro1, libro2]
+
+let mArray = ["perro", "gato"]
+
+var pipent = new Usuario ("Felipe", "Parrondo", lArray, mArray)
