@@ -41,7 +41,6 @@ const operaciones = () => {
     console.log("Se " + op + " el numero " + n1 + " y el numero " + n2)
 
     operacion(n1, n2, op)
-
 }
 
 operaciones()
