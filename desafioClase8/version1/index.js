@@ -3,7 +3,7 @@ const routerProductos = express.Router();
 const productos = require('./api/productos.js');
 
 const app = express();
-app.use(express.static(__dirname + 'public'));
+//app.use(express.static(__dirname + 'public'));
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -45,7 +45,7 @@ routerProductos.delete("/:id", (req, res) => {
     res.send("elemento borrado de forma exitosa!");
 })
 
-app.use("/api/productos", routerProductos);
+app.use("./api/productos", routerProductos);
 
 
 const PORT = 8080;
