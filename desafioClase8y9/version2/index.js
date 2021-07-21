@@ -12,8 +12,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 
-app.set("view engine", "handlebars");
-app.engine("handlebars", handlebars());
+//app.set("view engine", "handlebars");
+//app.engine("handlebars", handlebars());
+
+app.set("views", "./views")
+app.set("view engine", "pug")
 
 
 routerProductos.get("/", (req, res) =>{
@@ -58,7 +61,7 @@ app.get("/productos/vista", (req, res) => {
 })
 
 app.get("/productos/carga", (req, res) => {
-    res.render("ingreso")
+    res.render("ingreso.pug")
 })
 
 
