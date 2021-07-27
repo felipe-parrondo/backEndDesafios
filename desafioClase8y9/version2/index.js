@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const http = require("http").Server(app);
+const io = require("socket.io") (http);
 const routerProductos = express.Router();
 const bodyParser = require("body-parser");
 const handlebars = require("express-handlebars");
