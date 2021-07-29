@@ -19,7 +19,11 @@ form.addEventListener('submit', function(e) {
         thumbnail: th.value
     }
 
-    socket.emit("cargaProductos", tempObj);
+    socket.emit("cargaProductos", {
+        title: t.value, 
+        price: p.value, 
+        thumbnail: th.value
+    });
 
     let tableR = document.createElement("tr")
     let tableT = document.createElement("td")

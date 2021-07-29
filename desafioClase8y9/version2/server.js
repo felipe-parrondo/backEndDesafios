@@ -73,12 +73,12 @@ http.listen(PORT, () => {
 io.on("connection", (socket) => {
     console.log("Usuario conectado");
     //socket.emit("miMensaje", "Conectado!")
+    socket.on("cargaProductos", (tempObj) => {
+        try{
+            Productos.guardar(tempObj.title, tempObj.price, tempObj.thumbnail);
+        } catch(e) {
+            console.log(e)
+        }
+    })
 });
 
-io.on("cargaProductos", (tempObj) => {
-    try{
-        Productos.guardar(tempObj.title, tempObj.price, tempObj.thumbnail);
-    } catch(e) {
-        console.log(e)
-    }
-})
