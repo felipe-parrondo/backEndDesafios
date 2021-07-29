@@ -13,17 +13,16 @@ form.addEventListener('submit', function(e) {
     let p = document.getElementById("price");
     let th = document.getElementById("thumbnail");
 
-    let tempObj = {
-        title: t.value, 
-        price: p.value, 
-        thumbnail: th.value
-    }
-
     socket.emit("cargaProductos", {
         title: t.value, 
         price: p.value, 
         thumbnail: th.value
     });
+
+    let tabla = document.getElementById("tbody")
+    console.log(tabla.textContent)
+    let ultimaFila = tabla.lastChild;
+    console.log(ultimaFila.textContent)
 
     let tableR = document.createElement("tr")
     let tableT = document.createElement("td")

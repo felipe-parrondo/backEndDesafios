@@ -17,12 +17,12 @@
     </thead>
     <tbody id="tbody">
         {{#each productos}}
-        <tr>
-            <td> {{this.id}} </td>
-            <td> {{this.title}} </td>
-            <td> {{this.price}} </td>
-            <td> <image src="{{this.thumbnail}}"></image></td>
-        </tr>
+        <tr id="{{{this.id}}}">
+            <td>{{this.id}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.price}}</td>
+            <td><image src="{{this.thumbnail}}"></image></td>
+            </tr>
         {{/each}}
     </tbody>
 </table>
