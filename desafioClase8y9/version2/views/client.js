@@ -19,20 +19,26 @@ form.addEventListener('submit', function(e) {
         thumbnail: th.value
     });
 
-    let tabla = document.getElementById("tbody")
-    console.log(tabla.textContent)
+    /*
+    let tabla = document.getElementById("tbody")    //Intento fallido de tomar el id del ultimo número en la tabla para hacer diplay del id nuevo, asi que por ahora es 0
     let ultimaFila = tabla.lastChild;
-    console.log(ultimaFila.textContent)
+    */
+
 
     let tableR = document.createElement("tr")
+
     let tableT = document.createElement("td")
     tableT.textContent = t.value
+
     let tableP = document.createElement("td")
     tableP.textContent = p.value
+
     let tableTh = document.createElement("td")
     tableTh.textContent = th.value
+
     let tableNum = document.createElement("td")
     tableNum.textContent = 0
+
 
     tableR.appendChild(tableNum)
     tableR.appendChild(tableT)
