@@ -1,3 +1,5 @@
+//MODULOS
+
 const express = require("express");
 const app = express();
 const http = require("http").Server(app);
@@ -8,17 +10,36 @@ const handlebars = require("express-handlebars");
 const myApi = require("./api/api.js");
 const productos = myApi.laLista;
 const Productos = myApi.laClase;
+const objAuth = require("./api/auth.js");
+const Auth = objAuth.Auth;
 
+
+//CUSTOM M-WARES --- SIMULACIÓN DE AUTH
+
+var isAdminVerif = function (req, res, next) {
+    if(Auth.isAdmin == true){
+        next()
+    } else {
+        res.status(403).send(new Error("Ruta no permitida, falta de permisos"));
+    }
+}
+
+//M-WARES
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+routerProductos.use(isAdminVerif);
 
+
+//HBS Y CARPETA PUBLIC
 
 app.engine("handlebars", handlebars());
 app.set("view engine", "handlebars");
 
 app.use(express.static("./views"));
 
+
+//ENDPOINTS
 
 routerProductos.get("/", (req, res) =>{
     res.send(Productos.leer());
@@ -49,9 +70,10 @@ routerProductos.delete("/:id", (req, res) => {
     res.send(Productos.delete(req.params.id));
 });
 
-//USO HTML
 
-app.get("/productos/vista", (req, res) => {
+//VISUALIZACIÓN DEL FRONT
+
+app.get("/productos/vista", (req, res) => {   //PENDIENTE: IMPLEMENTAR ESTE ENDPOINT EN "/"
     let verif;
     if(productos){
         verif = true;
@@ -61,24 +83,35 @@ app.get("/productos/vista", (req, res) => {
     res.render("productos", {productos: productos, verif: verif});
 })
 
+app.get("/carrito/vista", (req, res) => {
+    res.render("carrito")
+})
 
 
-app.use("/api/productos", routerProductos);
+//ROUTER
+
+app.use("/productos", routerProductos);
+
+
+//PUERTO
 
 const PORT = 8080;
 http.listen(PORT, () => {
     console.log("Servidor escuchando en el puerto " + PORT);
 });
 
+
+//SOCKET.IO
+
 io.on("connection", (socket) => {
-    console.log("Usuario conectado");
+    //console.log("Usuario conectado");
     //socket.emit("miMensaje", "Conectado!")
     socket.on("cargaProductos", (tempObj) => {
         try{
             Productos.guardar(tempObj.title, tempObj.price, tempObj.thumbnail);
         } catch(e) {
-            console.log(e)
+            console.log(e);
         }
-    })
+    });
 });
 

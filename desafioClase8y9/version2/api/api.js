@@ -1,15 +1,33 @@
 var productos = [
     {
+        title: 1,
+        price: 1,
+        thumbnail: 1,
+        id: 3,
+        codigo: 3000,
+        timestamp: (new Date(Date.now() )).toString(),
+        desc: this.title + " description",
+        stock: true,
+    },
+    {
         title: "objetoDefaultPrueba",
         price: 69,
         thumbnail: "fotoPrueba",
-        id: 1
+        id: 1,
+        codigo: 1000,
+        timestamp: (new Date(Date.now() )).toString(),
+        desc: this.title + " description",
+        stock: true
     },
     {
         title: "objetoDefaultPrueba2",
         price: 70,
         thumbnail: "fotoPrueba",
-        id: 2
+        id: 2,
+        codigo: 2000,
+        timestamp: (new Date(Date.now() )).toString(),
+        desc: this.title + " description",
+        stock: true
     },
 ];
 
@@ -22,11 +40,15 @@ class Productos{
             title: titulo,
             price: precio,
             thumbnail: foto,
-            id: productos.length + 1
+            id: productos.length + 1,
+            codigo: productos.length + 1000,
+            timestamp: (new Date(Date.now() )).toString(),
+            desc: titulo + " description",
+            stock: true
         };
         productos.push(tempObj);
         
-        return tempObj;
+        return tempObj; 
     };
 
     static leer(){
