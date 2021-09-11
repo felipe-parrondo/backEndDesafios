@@ -8,7 +8,7 @@ exports.createContact = async (req, res, next) => {
     const id = nanoid();
     const document = await query
       .doc(`${id}`)
-      .create({ name: "Coder", lastName: "House", email: "coder@house.com" });
+      .create({ name: `${req.params.name}`, lastName: `${req.params.lastName}`, email: `${req.params.email}` });
     res.json(document);
   } catch (error) {
     res.json(error);
@@ -16,7 +16,7 @@ exports.createContact = async (req, res, next) => {
 };
 
 exports.getOneContact = async (req, res, next) => {
-  const id = "_7wjTTGensn77tqXfNchF";
+  const id = req.params.id;
   const document = await query.doc(`${id}`).get();
   const reponse = document.data();
   res.json(reponse);
@@ -36,13 +36,13 @@ exports.getAllContacts = async (req, res, next) => {
 };
 
 exports.updateContact = async (req, res, next) => {
-  const id = "_7wjTTGensn77tqXfNchF";
-  const response = await query.doc(`${id}`).update({ name: "Pepito Perez" });
+  const id = req.params.id;
+  const response = await query.doc(`${id}`).update({ name: `${req.params.newInfo}` });
   res.json(response)
 };
 
 exports.deleteContact = async (req, res, next) => {
-  const id = "_7wjTTGensn77tqXfNchF";
+  const id = req.params.id;
   const response = await query.doc(`${id}`).delete()
   res.json(response)
 };

@@ -1,0 +1,25 @@
+use desafioCoder
+
+db.items.insert(
+{
+	name: "fideos",
+	categoria: "harina",
+	stock: "20"
+})
+
+db.items.insert(
+{
+	name: "leche",
+	categoria: "lacteos"
+	stock: "30"
+})
+
+db.items.insert(
+{
+	name: "crema",
+	categoria: "lacteos"
+	stock: "15"
+})
+
+db.items.find()
+
