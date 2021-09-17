@@ -6,6 +6,22 @@ const io = require("socket.io")(http);
 const bodyParser = require("body-parser");
 const fs = require("fs");
 
+//NORMALIZR
+const normalizr = require("normalizr")
+const normalize = normalizr.normalize
+const denormalize = normalizr.denormalize
+const schema = normalizr.schema
+
+const email = new schema.Entity("email");
+const fecha = new schema.Entity("fecha");
+const mensaje = new schema.Entity("mensaje", {
+    sender: email,
+    date: fecha
+});
+const mensajeLog = new schema.Entity("mensajeLog", {
+    log: [mensaje]
+});
+
 //MIDDLE
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -26,22 +42,27 @@ http.listen(PORT, () => {
 var mensajes = [];
 
 io.on("connection", socket => {
-  fs.readFile("./mensajes.txt", "utf-8", function(e, data) {
-    if (data) {
-      let mensajesViejos = JSON.parse(data);
-      io.emit("mensajesGuardados", mensajesViejos);
-    }
-  });
+    fs.readFile("./mensajes.txt", "utf-8", function(e, data) {
+        if (data) {
+            let mensajesViejos = JSON.parse(data);
 
-  socket.on("mensajeNuevo", mnjs => {
-    mensajes.push(mnjs);
+            let denormalizedLog = denormalize(mensajesViejos.data, mensajeLog, mensajesViejos.entities)
 
-    let storageMensajes = JSON.stringify(mensajes);
+            io.emit("mensajesGuardados", normalizedLog);
+        }
+    });
 
-    fs.writeFileSync("./mensajes.txt", storageMensajes);
+    socket.on("mensajeNuevo", mnjs => {
+        mensajes.push(mnjs);
 
-    io.sockets.emit("mensajeNuevoEmit", mnjs);
+        let storageMensajes = JSON.stringify(mensajes);
 
-    console.log(mensajes);
-  });
+        let normalizedLog = normalize(storageMensajes, mensajeLog);
+
+        fs.writeFileSync("./mensajes.txt", normalizedLog);
+
+        io.sockets.emit("mensajeNuevoEmit", mnjs);
+
+        console.log(mensajes);
+    });
 });
