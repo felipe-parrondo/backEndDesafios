@@ -25,7 +25,6 @@ const mensajeLog = new schema.Entity("mensajeLog", {
 //MIDDLE
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(express.static("./public"));
 
 //CODE
 app.get("/", (req, res) => {
