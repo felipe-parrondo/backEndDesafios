@@ -1,0 +1,30 @@
+{
+  "name": "desafioclase26y27",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "ejs-mate": "^3.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "helmet": "^4.6.0",
+    "mongoose": "^6.0.12",
+    "nodemailer": "^6.7.2",
+    "passport": "^0.5.0",
+    "passport-facebook": "^3.0.0",
+    "passport-local": "^1.0.0",
+    "twilio": "^3.71.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

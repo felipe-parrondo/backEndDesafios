@@ -1,0 +1,33 @@
+<%- layout("layouts/main.ejs") %>
+<% if(signupM) { %>
+    <div><%= signupM %></div>
+<% } %>
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">  
+        <div class="card mt-4 text-center">
+            <div class="card-header">SIGN UP</div>
+            <div class="card-body">
+                <form action="/signup" method="post">
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-4">
+                        Signup
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="card social-block">
+            <div class="card-body">
+                <a class="btn w-100 btn-social btn-facebook" href="/auth/facebook" role="button">
+                    <i class="fab fa-facebook"></i>
+                    Signup con Facebook
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
